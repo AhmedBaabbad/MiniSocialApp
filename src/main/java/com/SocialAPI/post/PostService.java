@@ -1,5 +1,6 @@
 package com.SocialAPI.post;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,13 +38,44 @@ public class PostService {
 				user2,
 				"We all need someone","specifed");	
 			
-			private List<Post> posts= Arrays.asList(post1,post2);
+			//private List<Post> posts= Arrays.asList(post1,post2);
+			
+			List<Post> posts= new ArrayList<>(Arrays.asList(post1, post2));
 			
 			public List<Post> getAllPosts ()
 			{
 				return posts;
 				
 			}
+			
+			public Post getPost(String id) {
+		    	Post post = posts.stream()
+				.filter(t -> id.equals(t.getId()))
+				.findFirst()
+				.orElse(null);
+			return post;
+		}
+			public void addPost(Post post)
+			{
+				posts.add(post);
+			}
+			public void deletePost (String id)	
+			{
+				posts.removeIf(t-> t.getId().equals(id));
+			}
+			
+			public void updatePost(Post post, String id)
+			{
+				for(int i=0; i<posts.size(); i++) 
+				{
+					Post p=posts.get(i);
+					if(p.getId().equals(id))
+					{
+						posts.set(i, post);
+					}
+				}
+			}
+
 	
 
 }
