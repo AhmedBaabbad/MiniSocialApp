@@ -1,9 +1,20 @@
 package com.SocialAPI.location;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="LOCATION")
 public class Location {
 	
+	@Id
+	@Column(name="locationId")
 	   private String id;
+	@Column(name="NAME")
 	   private String name;
+	@Column(name="DESC")
 	   private String desc;
 	public Location(String id, String name, String desc) {
 		super();
@@ -11,6 +22,10 @@ public class Location {
 		this.name = name;
 		this.desc=desc;
 	}
+	public Location () {
+		// constructor empty
+	}
+	
 	public String getId() {
 		return id;
 	}

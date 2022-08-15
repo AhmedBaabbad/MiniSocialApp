@@ -2,6 +2,7 @@ package com.SocialAPI.user;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,7 +26,7 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/users/{id}")
-	public User getUser(@PathVariable String id) {
+	public Optional <User> getUser(@PathVariable String id) {
 
 		return userService.getUser(id);
 	}
@@ -43,7 +44,7 @@ public class UserController {
 	@RequestMapping(method=RequestMethod.PUT, value="/users/{id}")
 	public void updateUser(@RequestBody User user, @PathVariable String id)
 	{
-		userService.updateUser(user, id);
+		userService.updateUser(id, user);
 	}
 
 

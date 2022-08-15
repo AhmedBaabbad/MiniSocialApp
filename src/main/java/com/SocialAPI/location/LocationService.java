@@ -3,13 +3,54 @@ package com.SocialAPI.location;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.SocialAPI.student.StudentRepository;
 
 @Service
 public class LocationService {
 	
-	Location location1 = new Location("l1", "Mukalla", " this branch is considered as main");
+	@Autowired
+	public LocationRepository locationRepository;
+	
+	public List<Location> getAllLocations() {
+		
+		List<Location> locations = new ArrayList<>();
+		
+		locationRepository.findAll()
+		.forEach(locations::add);
+		
+		return locations;		
+	}
+		
+	public void addLocation(Location location) {
+		locationRepository.save(location);
+	}
+		
+	public Optional<Location> getLocation(String id) {
+		return locationRepository.findById(id);
+	}
+	
+	public void deleteLocation(String id) {
+		locationRepository.deleteById(id);
+	}
+	
+	public void updateLocation(String id, Location location) {
+		locationRepository.save(location);
+	}
+	
+	public List<Location> getLocationsByName (String name)
+	{
+		List<Location> locations = new ArrayList<>();
+		locationRepository.findByName(name)
+		.forEach(locations:: add);
+		return locations;
+	}
+	
+	/*Location location1 = new Location("l1", "Mukalla", " this branch is considered as main");
 	Location location2 = new Location("l2", "Aden", " this branch is established as second branch");
 	Location location3 = new Location("l3", "Sanaa"," this branch is established as third branch");	
 	Location location4 = new Location("l4", "Taiz"," this branch is founded after all branches");		
@@ -52,6 +93,6 @@ public class LocationService {
 				locations.set(i, location);
 			}
 		}
-	}
+	}*/
 
 }

@@ -3,16 +3,54 @@ package com.SocialAPI.post;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.SocialAPI.location.Location;
+import com.SocialAPI.location.LocationRepository;
 import com.SocialAPI.user.User;
 
 @Service
 public class PostService {
 	
-	User user1 = new User(
+	@Autowired
+	public PostRepository postRepository;
+	
+	public List<Post> getAllPosts() {
+		
+		List<Post> posts = new ArrayList<>();
+		
+		postRepository.findAll()
+		.forEach(posts::add);
+		
+		return posts;		
+	}
+		
+	public void addPost(Post post) {
+		postRepository.save(post);
+	}
+		
+	public Optional<Post> getPost(String id) {
+		return postRepository.findById(id);
+	}
+	
+	public void deletePost(String id) {
+		postRepository.deleteById(id);
+	}
+	
+	public void updatePost(String id, Post post) {
+		postRepository.save(post);
+	}
+	public List<Post> getPostByUser(String id)
+	{
+		List<Post> posts= new ArrayList<>();
+		postRepository.findByUserId(id)
+		.forEach(posts:: add);
+		return posts;
+	}
+	/*User user1 = new User(
 			"u1", 
 			"Ahmed", 
 			"Omar",
@@ -76,6 +114,6 @@ public class PostService {
 				}
 			}
 
-	
+	*/
 
 }

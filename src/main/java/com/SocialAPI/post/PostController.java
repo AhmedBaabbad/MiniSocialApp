@@ -3,6 +3,7 @@ package com.SocialAPI.post;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public class PostController {
 	}
 
 	@RequestMapping(value = "/posts/{id}")
-	public Post getPost(@PathVariable String id) {
+	public Optional<Post>getPost(@PathVariable String id) {
 		return postservice.getPost(id);
 
 	}
@@ -45,7 +46,7 @@ public class PostController {
 	@RequestMapping(method=RequestMethod.PUT, value="/posts/{id}")
 	public void updatePost (@RequestBody Post post, @PathVariable String id)
 	{
-		postservice.updatePost(post, id);
+		postservice.updatePost(id, post);
 	}
 
 }

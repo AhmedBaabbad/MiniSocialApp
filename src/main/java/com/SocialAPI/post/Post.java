@@ -1,13 +1,26 @@
 package com.SocialAPI.post;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 import com.SocialAPI.user.User;
 
+@Entity
+@Table(name="POST")
 public class Post {
-	
+	@Id
+	@Column(name="postId")
 	 private String id;
+	@Column(name="POSTDATE")
 	   private String postdate;
+	   @ManyToOne
 	   private User user;
+	@Column(name="DETAILS")
 	   private String details;
+	@Column(name="TYPE")
        private String type;
 	public Post(String id, String postdate, User user, String details, String type) {
 		super();
@@ -17,6 +30,10 @@ public class Post {
 		this.details = details;
 		this.type = type;   
 }
+	
+	public Post () {
+		// empty
+	}
 	public String getId() {
 		return id;
 	}
